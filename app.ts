@@ -12,8 +12,33 @@
 
 
 const Dtmf = require("./src/DtmfClass");
+const Site = require("./src/SiteClass");
+
+let dtmf   = new Dtmf('Dtmf');
+let site   = new Site('Site');
+
+//entity.findAndCountEntries();
+
+console.log(`Name of entity: ${dtmf.getName()}`);
+console.log(`Name of entity: ${typeof(dtmf)}`);
 
 
-let entity = new Dtmf('Dtmf');
+// OK
+dtmf.getAllEntities().then( function(result){
+    console.log(`### getallEntities for ${dtmf.getName()}`);
+    console.log(`${dtmf.getName()}:  ${JSON.stringify(result)}`);
+});
 
-entity.findAndCountEntries();
+// OK
+site.getAllEntities().then( function(result){
+    console.log(`### getallEntities for ${site.getName()}`);
+    console.log(`${site.getName()}:  ${JSON.stringify(result)}`);
+});
+
+
+// OK
+dtmf.findEntriesWithSiteInformation().then( function(result){
+    console.log(`### findEntriesWithSiteInformation for ${dtmf.getName()}`);
+    console.log(`${dtmf.getName()}:  ${JSON.stringify(result)}`);
+});
+

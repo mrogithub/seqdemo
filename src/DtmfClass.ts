@@ -1,14 +1,10 @@
-const Model = require('../models');
+const Entity = require('./EntityClass')
 
-class Dtmf{
-
-    entity:any;
-    entityName:string;
+class Dtmf extends Entity{
 
     constructor(name){
 
-        this.entityName = name;
-        this.entity = Model[name];
+        super(name);
     }
 
     findAndCountEntries() {
@@ -21,6 +17,14 @@ class Dtmf{
 
     }
 
+    findEntriesWithSiteInformation(){
+        let options = {
+            include: [{model: require('../models').Site, as: 'site'} ]
+        };
+
+        return super.getAllEntitiesWithOptions(options)
+    }
 }
+
 
 module.exports = Dtmf;

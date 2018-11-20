@@ -49,4 +49,4 @@ module.exports = function (sequelize, DataTypes) {
         timestamps: false
     });
 };
-//# sourceMappingURL=dtmf.js.map
+
