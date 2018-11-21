@@ -25,8 +25,9 @@ site.getAllEntities().then(function (result) {
     console.log("### getallEntities for " + site.getName());
     console.log(site.getName() + ":  " + JSON.stringify(result));
 });
-// OK
-dtmf.findEntriesWithSiteInformation().then(function (result) {
-    console.log("### findEntriesWithSiteInformation for " + dtmf.getName());
-    console.log(dtmf.getName() + ":  " + JSON.stringify(result));
-});
+//
+// // OK
+// dtmf.findEntriesWithSiteInformation().then( function(result){
+//     console.log(`### findEntriesWithSiteInformation for ${dtmf.getName()}`);
+//     console.log(`${dtmf.getName()}:  ${JSON.stringify(result)}`);
+// });

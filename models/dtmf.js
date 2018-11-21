@@ -1,15 +1,18 @@
 "use strict";
-/* jshint indent: 2 */
-module.exports = function (sequelize, DataTypes) {
-    return sequelize.define('dtmf', {
+// "use strict";
+// /* jshint indent: 2 */
+Object.defineProperty(exports, "__esModule", { value: true });
+const Sequelize = require("sequelize");
+exports.default = (sequelize) => {
+    const attributes = {
         dtmf_id: {
-            type: DataTypes.INTEGER,
+            type: Sequelize.INTEGER,
             allowNull: false,
             primaryKey: true,
             autoIncrement: true
         },
         site_id: {
-            type: DataTypes.INTEGER,
+            type: Sequelize.INTEGER,
             allowNull: false,
             references: {
                 model: 'site',
@@ -17,35 +20,33 @@ module.exports = function (sequelize, DataTypes) {
             }
         },
         name: {
-            type: DataTypes.STRING,
+            type: Sequelize.STRING,
             allowNull: false
         },
         sequenz: {
-            type: DataTypes.STRING,
+            type: Sequelize.STRING,
             allowNull: false
         },
         ton: {
-            type: DataTypes.INTEGER,
+            type: Sequelize.INTEGER,
             allowNull: false
         },
         pause: {
-            type: DataTypes.INTEGER,
+            type: Sequelize.INTEGER,
             allowNull: false
         },
         grantton: {
-            type: DataTypes.INTEGER,
+            type: Sequelize.INTEGER,
             allowNull: false
         },
         grantton_puls: {
-            type: DataTypes.INTEGER,
+            type: Sequelize.INTEGER,
             allowNull: false
         },
         grantton_klang: {
-            type: DataTypes.INTEGER,
+            type: Sequelize.INTEGER,
             allowNull: false
         }
-    }, {
-        tableName: 'dtmf',
-        timestamps: false
-    });
+    };
+    return sequelize.define("Dtmf", attributes, { tableName: 'dtmf', timestamps: false });
 };

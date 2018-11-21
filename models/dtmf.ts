@@ -1,15 +1,36 @@
-"use strict";
-/* jshint indent: 2 */
-module.exports = function (sequelize, DataTypes) {
-    return sequelize.define('dtmf', {
+// "use strict";
+// /* jshint indent: 2 */
+
+import * as Sequelize from "sequelize";
+
+interface DtmfAttributes {
+        dtmf_id: number;
+        site_id: number;
+        name: string;
+        sequenz: string;
+        ton: number;
+        pause: number;
+        grantton: number;
+        grantton_puls: number;
+        grantton_klang: number;
+        createdAt?: string;
+        updatedAt?: string;
+
+}
+
+type DtmfInstance = Sequelize.Instance<DtmfAttributes> & DtmfAttributes;
+
+export default(sequelize: Sequelize.Sequelize) => {
+
+    const attributes: SequelizeAttributes<DtmfAttributes> = {
         dtmf_id: {
-            type: DataTypes.INTEGER,
+            type: Sequelize.INTEGER,
             allowNull: false,
             primaryKey: true,
             autoIncrement: true
         },
         site_id: {
-            type: DataTypes.INTEGER,
+            type: Sequelize.INTEGER,
             allowNull: false,
             references: {
                 model: 'site',
@@ -17,36 +38,34 @@ module.exports = function (sequelize, DataTypes) {
             }
         },
         name: {
-            type: DataTypes.STRING,
+            type: Sequelize.STRING,
             allowNull: false
         },
         sequenz: {
-            type: DataTypes.STRING,
+            type: Sequelize.STRING,
             allowNull: false
         },
         ton: {
-            type: DataTypes.INTEGER,
+            type: Sequelize.INTEGER,
             allowNull: false
         },
         pause: {
-            type: DataTypes.INTEGER,
+            type: Sequelize.INTEGER,
             allowNull: false
         },
         grantton: {
-            type: DataTypes.INTEGER,
+            type: Sequelize.INTEGER,
             allowNull: false
         },
         grantton_puls: {
-            type: DataTypes.INTEGER,
+            type: Sequelize.INTEGER,
             allowNull: false
         },
         grantton_klang: {
-            type: DataTypes.INTEGER,
+            type: Sequelize.INTEGER,
             allowNull: false
         }
-    }, {
-        tableName: 'dtmf',
-        timestamps: false
-    });
-};
+    };
 
+    return sequelize.define<DtmfInstance, DtmfAttributes>("Dtmf", attributes, {tableName: 'dtmf', timestamps: false});
+}

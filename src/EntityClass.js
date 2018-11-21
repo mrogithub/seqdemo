@@ -1,18 +1,18 @@
-var Model = require('../models');
-var Entity = /** @class */ (function () {
-    function Entity(name) {
+"use strict";
+const Model = require('../models');
+class Entity {
+    constructor(name) {
         this.entityName = name;
         this.entity = Model[name];
     }
-    Entity.prototype.getName = function () {
+    getName() {
         return this.entityName;
-    };
-    Entity.prototype.getAllEntities = function () {
+    }
+    getAllEntities() {
         return this.entity.findAll();
-    };
-    Entity.prototype.getAllEntitiesWithOptions = function (options) {
+    }
+    getAllEntitiesWithOptions(options) {
         return this.entity.findAll(options);
-    };
-    return Entity;
-}());
+    }
+}
 module.exports = Entity;
