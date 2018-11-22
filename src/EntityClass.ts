@@ -1,7 +1,6 @@
 const Model = require('../models');
 
-
-class Entity {
+class EntityClass {
 
     entityName: string;
     entity: any;
@@ -21,10 +20,10 @@ class Entity {
         return this.entity.findAll();
     }
 
-    getAllEntitiesWithOptions(options){
+    getAllEntitiesWithOptions(options: Object){
 
         return this.entity.findAll(options);
     }
 }
 
-module.exports = Entity;
+module.exports = EntityClass;

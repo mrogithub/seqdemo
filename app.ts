@@ -1,10 +1,10 @@
 
-const Dtmf  = require("./src/DtmfClass");
-const Site  = require("./src/SiteClass");
+const DtmfClass  = require("./src/DtmfClass");
+const SiteClass  = require("./src/SiteClass");
 
 
-let dtmf   = new Dtmf('Dtmf');
-let site   = new Site('Site');
+let dtmf   = new DtmfClass('Dtmf');
+let site   = new SiteClass('Site');
 
 //entity.findAndCountEntries();
 
