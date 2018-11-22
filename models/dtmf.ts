@@ -2,6 +2,7 @@
 // /* jshint indent: 2 */
 
 import * as Sequelize from "sequelize";
+import {SiteModel} from "./site";
 
 interface DtmfAttributes {
         dtmf_id: number;
@@ -15,12 +16,13 @@ interface DtmfAttributes {
         grantton_klang: number;
         createdAt?: string;
         updatedAt?: string;
-
+        Site?: SiteModel;
 }
 
 type DtmfInstance = Sequelize.Instance<DtmfAttributes> & DtmfAttributes;
+export type DtmfModel    = Sequelize.Model<DtmfInstance, DtmfAttributes>;
 
-export default(sequelize: Sequelize.Sequelize) => {
+export function initDtmfModel(sequelize: Sequelize.Sequelize) : DtmfModel {
 
     const attributes: SequelizeAttributes<DtmfAttributes> = {
         dtmf_id: {
@@ -33,7 +35,7 @@ export default(sequelize: Sequelize.Sequelize) => {
             type: Sequelize.INTEGER,
             allowNull: false,
             references: {
-                model: 'site',
+                model: 'SiteModel',
                 key: 'site_id'
             }
         },
@@ -67,5 +69,11 @@ export default(sequelize: Sequelize.Sequelize) => {
         }
     };
 
-    return sequelize.define<DtmfInstance, DtmfAttributes>("Dtmf", attributes, {tableName: 'dtmf', timestamps: false});
+    const model =  sequelize.define<DtmfInstance, DtmfAttributes>("Dtmf", attributes, {tableName: 'dtmf', timestamps: false});
+
+    model.associate = ( {Site} : {Site: SiteModel}) =>{
+        model.belongsTo( Site, {foreignKey: 'site_id', targetKey: 'site_id', as: 'site'});
+    };
+
+    return model;
 }

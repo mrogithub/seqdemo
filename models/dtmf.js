@@ -3,7 +3,7 @@
 // /* jshint indent: 2 */
 Object.defineProperty(exports, "__esModule", { value: true });
 const Sequelize = require("sequelize");
-exports.default = (sequelize) => {
+function initDtmfModel(sequelize) {
     const attributes = {
         dtmf_id: {
             type: Sequelize.INTEGER,
@@ -15,7 +15,7 @@ exports.default = (sequelize) => {
             type: Sequelize.INTEGER,
             allowNull: false,
             references: {
-                model: 'site',
+                model: 'SiteModel',
                 key: 'site_id'
             }
         },
@@ -48,5 +48,10 @@ exports.default = (sequelize) => {
             allowNull: false
         }
     };
-    return sequelize.define("Dtmf", attributes, { tableName: 'dtmf', timestamps: false });
-};
+    const model = sequelize.define("Dtmf", attributes, { tableName: 'dtmf', timestamps: false });
+    model.associate = ({ Site }) => {
+        model.belongsTo(Site, { foreignKey: 'site_id', targetKey: 'site_id', as: 'site' });
+    };
+    return model;
+}
+exports.initDtmfModel = initDtmfModel;

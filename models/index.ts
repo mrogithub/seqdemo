@@ -1,7 +1,7 @@
 import * as Sequelize from "sequelize";
 
-import DtmfFactory from "./dtmf";
-import SiteFactory from "./site";
+import {initDtmfModel} from "./dtmf";
+import {initSiteModel} from "./site";
 
 const sequelize = new Sequelize('dball-2', 'postgres', 'postgres',
     { dialect: 'postgres', port: 5500, host: '127.0.0.1'});
@@ -9,10 +9,17 @@ const sequelize = new Sequelize('dball-2', 'postgres', 'postgres',
 const models = {
     sequelize,
     Sequelize,
-    Dtmf: DtmfFactory(sequelize),
-    Site: SiteFactory(sequelize)
+    Dtmf: initDtmfModel(sequelize),
+    Site: initSiteModel(sequelize)
 };
 
+Object.keys(models).forEach( (key) =>{
+     // @ts-ignore
+    if ('associate' in models[key]) {
+        // @ts-ignore
+        models[key].associate(models);
+    }
+});
 
 // Define the relations // associations between the models
 //

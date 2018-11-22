@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const Sequelize = require("sequelize");
-exports.default = (sequelize) => {
+function initSiteModel(sequelize) {
     const attributes = {
         site_id: {
             type: Sequelize.INTEGER,
@@ -29,5 +29,7 @@ exports.default = (sequelize) => {
             defaultValue: 'to_char(now(), YYYY-MM-DD HH24:MI:SS'
         }
     };
-    return sequelize.define("Site", attributes, { tableName: 'site', timestamps: false });
-};
+    const model = sequelize.define("Site", attributes, { tableName: 'site', timestamps: false });
+    return model;
+}
+exports.initSiteModel = initSiteModel;

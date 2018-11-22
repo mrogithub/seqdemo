@@ -10,9 +10,9 @@ interface SiteAttributes{
 }
 
 type SiteInstance = Sequelize.Instance<SiteAttributes> & SiteAttributes;
+export type SiteModel    = Sequelize.Model<SiteInstance, SiteAttributes>;
 
-
-export default(sequelize: Sequelize.Sequelize) => {
+export function initSiteModel(sequelize: Sequelize.Sequelize): SiteModel {
 
     const attributes: SequelizeAttributes<SiteAttributes> = {
         site_id: {
@@ -42,6 +42,8 @@ export default(sequelize: Sequelize.Sequelize) => {
         }
     };
 
-    return sequelize.define<SiteInstance, SiteAttributes>("Site", attributes, { tableName: 'site', timestamps: false})
+    const model = sequelize.define<SiteInstance, SiteAttributes>("Site", attributes, { tableName: 'site', timestamps: false});
+
+    return model;
 
 }

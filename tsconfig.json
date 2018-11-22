@@ -54,6 +54,7 @@
   },
   "include": [
     "src/**/*.ts",
+    "./app.ts",
     "models/**/*.ts",
     "typings/**/*"
   ]
